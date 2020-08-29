@@ -1,0 +1,28 @@
+  .SortableMarketTable {
+    width: 1024px;
+    border: none;
+    background-color: #242936;
+    margin:0 auto;
+
+    .SortableMarketTable th {
+      border: none;
+      color: #6d717a;
+      background-color: #242936;
+      font-weight: 700;
+      line-height: 1.4rem;
+      padding: .7rem 1.6rem;
+      vertical-align: middle;
+    }
+
+    .SortableMarketTable__favoriteCell{
+      padding: .7rem 1.6rem;
+    }
+
+    .SortableMarketTable__coinNameCell{
+      padding-left: 0!important;
+      width: 180px;
+    }
+
+
+  }
+

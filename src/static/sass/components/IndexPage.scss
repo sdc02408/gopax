@@ -1,4 +1,26 @@
-  .SortableMarketTable {
+.SelectTab{
+  width: 1024px;
+
+  margin: 0 auto;
+
+  .SelectTabFilter{
+    display: flex;
+    width:300px;
+    justify-content: space-between;
+
+    .SelectableMarketFilters{
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 2rem;
+    }
+
+  }
+
+
+}
+
+.SortableMarketTable {
     width: 1024px;
     border: none;
     background-color: #242936;

@@ -9,7 +9,7 @@ import SortTable from '../components/views/SortTable'
 function App() {
   return (
     <div className="App">
-      <IndexPage />
+      {/*<IndexPage />*/}
       <TradingPairsData />
       {/*<TradingPairsStatsData />*/}
       {/*<AssetsData />*/}

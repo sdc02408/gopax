@@ -3,6 +3,8 @@ import {fetchTradingPairs, fetchAssets, fetchTradingPairsStats} from '../actions
 import {useDispatch, useSelector} from 'react-redux'
 import SortTable from '../components/views/SortTable'
 import '../static/sass/components/SortTable.scss'
+import BtcTable from "../components/views/BtcTable";
+import IndexPage from "../components/views/IndexPage";
 
 const TradingPairsData = () => {
 
@@ -67,7 +69,9 @@ const TradingPairsData = () => {
 
     return (
         <div className="SortableTable">
-
+            <BtcTable
+                finalData={finalData}
+            />
             {/*{tradingPairsData && tradingPairsData.map(coins => (*/}
             {/*  <SortTable key={coins.id} baseAsset={coins.baseAsset} quoteAsset={coins.quoteAsset}/>*/}
             {/*))}*/}
@@ -76,7 +80,7 @@ const TradingPairsData = () => {
             {/*{finalData && finalData.filter(name => name.quoteAsset.includes('BTC')).map(AllCoin => (*/}
 
             {/*filter(name => name.close > 0 ).*/}
-            {finalData && finalData.filter(names => names.quoteAsset.includes('KRW')).map(AllCoin => (
+            {finalData && finalData.filter(names => names.quoteAsset.includes('BTC')).map(AllCoin => (
 
                 <SortTable
                     key={AllCoin.id}
@@ -93,6 +97,11 @@ const TradingPairsData = () => {
                     time={AllCoin.time}
                 />
             ))}
+
+
+
+
+
 
 
 

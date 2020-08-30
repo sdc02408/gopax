@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import '../../static/sass/components/IndexPage.scss'
 
 function IndexPage (props) {
-  
+  const names = ['James', 'John', 'Paul', 'Ringo', 'George'];
+
+
   return (
     <div>
-      
+
         <table className=" SortableMarketTable ">
           <thead>
           <tr>

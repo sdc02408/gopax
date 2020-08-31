@@ -1,64 +1,155 @@
 import React, {useState} from 'react'
 import '../../static/sass/components/SortTable.scss'
 import {StarOutlined} from '@ant-design/icons'
-import SortTable from "./SortTable";
-import SortTableMarket from "./SortTableMarket";
-function BtcTable (props) {
-console.log(props.finalData,"fdfdfdf")
+import '../../static/sass/components/IndexPage.scss'
+import Table from './Table'
+import BTable from './Btable'
 
-    const [a,setA ] = useState('')
 
-    const onClickFavorite =()=>{
-        {props.finalData && props.finalData.filter(names => names.quoteAsset.includes('KRW')).map(AllCoin => (
+function BtcTable(props) {
+    console.log(props.finalData, "통째로 다준거야")
 
-            <th className="SortableMarketTable__favoriteCell">{AllCoin}</th>
+    const [changeKrwBtc, setChangeKrwBtc] = useState(true)
+    const [a, setA] = useState(false)
 
-        ))}
+    const [isToggled, setToggled] = useState(false);
+    const toggleTrueFalse = () => {
 
-   }
+        if (isToggled) {
+            {
+                props.finalData && props.finalData.map(AllCon => (
+                    reference.push(AllCon)
 
-    const onClickKrw =()=>{
-        console.log('시발')
+                ))
+            }
+            reference.sort(function (u, b) { // 오름차순
+                return u.high < b.high ? -1 : u.high > b.high ? 1 : 0;
+                // if(u.high < b.high) {
+                //     return a.direction === 'descending' ? 1 : -1;
+                // }
+                //  if (u.high > b.high) {
+                //      return a.direction === 'descending' ? -1 : 1;
+                //  }
+            });
+
+            setA(reference)
+        } else {
+            props.finalData && props.finalData.map(AllCon => (
+                reference.push(AllCon)
+
+            ))
+
+        reference.sort(function (u, b) { // 오름차순
+            // return u.high < b.high ? -1 : u.high > b.high ? 1 : 0;
+            if (u.high < b.high) {
+                return a.direction === 'ascending' ? -1 : 1;
+            }
+            if (u.high > b.high) {
+                return a.direction === 'ascending' ? 1 : -1;
+            }
+        });
+
+        setA(reference)
+
     }
 
-    const onClickBtc =()=>{
-        console.log('시발')
+        setToggled(!isToggled)
+            console.log(isToggled,'hihih')
+        console.log(a,"aaaaaaaaaahghg")
     }
 
+    const onClickFavorite = () => {
+        setChangeKrwBtc(true)
+    }
+
+    const onClickKrw = () => {
+        setChangeKrwBtc(false);
+    }
+
+    const onClickBtc = () => {
+        console.log('시발')
+    }
+    let reference = [];
+
+    //sorting
     const onClickSortName = () => {
-        console.log('정렬해봐라')
+
+
+
+        {props.finalData && props.finalData.map(AllCon => (
+            reference.push(AllCon)
+
+        )) }
+        reference.sort(function(u, b) { // 오름차순
+            return u.high < b.high ? -1 : u.high > b.high ? 1 : 0;
+           // if(u.high < b.high) {
+           //     return a.direction === 'descending' ? 1 : -1;
+           // }
+           //  if (u.high > b.high) {
+           //      return a.direction === 'descending' ? -1 : 1;
+           //  }
+        });
+
+        setA(reference)
+        console.log(a,"aaaaaaaaaahghg")
+
+
     }
-    return(
+
+
+    // props.finalData(function (a,b) {
+    //     return a.nameKo < b.nameKo ? -1 : a.nameKo > b.nameKo ? 1 : 0;
+    // })
+
+    return (
 
         <div>
 
             <div className="SelectTab">
                 <div className="SelectTabFilter">
-                    <div className="SelectableMarketFilters" onClick={onClickFavorite}>관심</div>
-                    <div className="SelectableMarketFilters" onClick={onClickKrw}>KRW</div>
-                    <div className="SelectableMarketFilters" onClick={onClickBtc}>BTC</div>
+                    <button className="SelectableMarketFilters" onClick={onClickFavorite}>관심</button>
+                    <button className="SelectableMarketFilters" onClick={onClickKrw}>KRW</button>
+                    <button className="SelectableMarketFilters" onClick={onClickBtc}>BTC</button>
                 </div>
             </div>
 
             <table className=" SortableMarketTable ">
+
                 <thead>
-                <tr>
-                    <th className="SortableMarketTable__favoriteCell"></th>
+                <tr className="SortableMarketTableTr">
+                    <th className="SortableMarketTable__favoriteCell">j</th>
                     <th className="SortableMarketTable__coinNameCell" onClick={onClickSortName}>이름</th>
-                    <th className="SortableMarketTable__lastPriceCell">현재가</th>
+                    <th className="SortableMarketTable__lastPriceCell" onClick={toggleTrueFalse}>현재가</th>
                     <th className="SortableTable__align--right">최고가</th>
                     <th className="SortableTable__align--right">최저가</th>
                     <th className="SortableMarketTable__quoteVolumeCell ">거래대금</th>
                 </tr>
                 </thead>
 
+                <tbody>
 
+                {changeKrwBtc ?
+                    <Table finalData={props.finalData}/>
+                    :
+                    <BTable finalData={props.finalData} />
+                }
+
+                {isToggled ?
+
+                    <Table finalData={a}  />
+
+                    :
+                    <BTable finalData={a} />
+                }
+
+
+
+
+
+                </tbody>
             </table>
-
         </div>
-
     )
-
 }
 
 export default BtcTable

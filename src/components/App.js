@@ -5,6 +5,7 @@ import TradingPairsData from '../container/TradingPairsData'
 import TradingPairsStatsData from '../container/TradingPairsStatsData'
 import AssetsData from '../container/AssetsData'
 import SortTable from '../components/views/SortTable'
+import BtcTable from "./views/BtcTable";
 
 function App() {
   return (

@@ -68,7 +68,7 @@ const TradingPairsData = () => {
 
 
     return (
-        <div className="SortableTable">
+        <div>
             <BtcTable
                 finalData={finalData}
             />
@@ -80,23 +80,23 @@ const TradingPairsData = () => {
             {/*{finalData && finalData.filter(name => name.quoteAsset.includes('BTC')).map(AllCoin => (*/}
 
             {/*filter(name => name.close > 0 ).*/}
-            {finalData && finalData.filter(names => names.quoteAsset.includes('BTC')).map(AllCoin => (
+            {/*{finalData && finalData.filter(names => names.quoteAsset.includes('BTC')).map(AllCoin => (*/}
 
-                <SortTable
-                    key={AllCoin.id}
-                    idCommon={AllCoin.idCommon}
-                    nameCommon={AllCoin.nameCommon}
-                    nameCommonStates={AllCoin.nameCommonStats}
-                    nameKor={AllCoin.nameKor}
-                    open={AllCoin.open}
-                    quoteAsset={AllCoin.quoteAsset}
-                    high={AllCoin.high}
-                    low={AllCoin.low}
-                    close={AllCoin.close}
-                    volume={AllCoin.volume}
-                    time={AllCoin.time}
-                />
-            ))}
+            {/*    <SortTable*/}
+            {/*        key={AllCoin.id}*/}
+            {/*        idCommon={AllCoin.idCommon}*/}
+            {/*        nameCommon={AllCoin.nameCommon}*/}
+            {/*        nameCommonStates={AllCoin.nameCommonStats}*/}
+            {/*        nameKor={AllCoin.nameKor}*/}
+            {/*        open={AllCoin.open}*/}
+            {/*        quoteAsset={AllCoin.quoteAsset}*/}
+            {/*        high={AllCoin.high}*/}
+            {/*        low={AllCoin.low}*/}
+            {/*        close={AllCoin.close}*/}
+            {/*        volume={AllCoin.volume}*/}
+            {/*        time={AllCoin.time}*/}
+            {/*    />*/}
+            {/*))}*/}
 
 
 

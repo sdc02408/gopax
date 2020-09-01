@@ -2,20 +2,85 @@ import React, {useState} from 'react'
 import '../../static/sass/components/SortTable.scss'
 import {StarOutlined} from '@ant-design/icons'
 import '../../static/sass/components/IndexPage.scss'
-import Table from './Table'
+import Tables from './Table'
 import BTable from './Btable'
-
+import ClostTable from './ClostTable'
+import {fetchAssetsData} from "../../actions/actions";
+import { Table } from 'antd';
 
 function BtcTable(props) {
-    console.log(props.finalData, "통째로 다준거야")
+    // console.log(props.finalData, "통째로 다준거야")
 
-    const [changeKrwBtc, setChangeKrwBtc] = useState(true)
-    const [a, setA] = useState(false)
+    // const [changeKrwBtc, setChangeKrwBtc] = useState(true)
+    //KRW, BTC 탭으로 분류
+    const [changeKrw, setChangeKrw] = useState(true)
+    const [changeBtc, setChangeBtc] = useState(false)
 
+    //분류하기
+    const [a, setA] = useState([])
+    const [z, setZ] = useState([])
+    //table 정렬 토글
     const [isToggled, setToggled] = useState(false);
+    const [btcToggle, setBtcToggle] = useState(true)
+
+    const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+        },
+        {
+            title: 'open',
+            dataIndex: 'open',
+            sorter: {
+                compare: (a, b) => a.open - b.open,
+                multiple: 3,
+            },
+        },
+        {
+            title: 'high',
+            dataIndex: 'high',
+            sorter: {
+                compare: (a, b) => a.high - b.high,
+                multiple: 2,
+            },
+        },
+        {
+            title: 'low',
+            dataIndex: 'low',
+            sorter: {
+                compare: (a, b) => a.low - b.low,
+                multiple: 1,
+            },
+        },
+    ];
+
+    const dataa = [];
+    {
+        props.finalData && props.finalData.map(AllC => (
+            dataa.push(AllC)
+        ))
+    }
+
+
+
+    let reference = [];
+
+    const onClickFavorite = () => {
+        setChangeKrw(true)
+        setChangeBtc(false);
+    }
+
+    const onClickKrw = () => {
+        setChangeKrw(false)
+        setChangeBtc(true);
+    }
+
     const toggleTrueFalse = () => {
 
         if (isToggled) {
+            setChangeBtc(false)
+            setChangeKrw(false)
+
             {
                 props.finalData && props.finalData.map(AllCon => (
                     reference.push(AllCon)
@@ -24,86 +89,50 @@ function BtcTable(props) {
             }
             reference.sort(function (u, b) { // 오름차순
                 return u.high < b.high ? -1 : u.high > b.high ? 1 : 0;
-                // if(u.high < b.high) {
-                //     return a.direction === 'descending' ? 1 : -1;
-                // }
-                //  if (u.high > b.high) {
-                //      return a.direction === 'descending' ? -1 : 1;
-                //  }
+
             });
 
+            // setChangeKrw(false)
+            // setChangeBtc(false);
             setA(reference)
-        } else {
+
+        }  else  {
+            setChangeBtc(false)
+            setChangeBtc(false)
             props.finalData && props.finalData.map(AllCon => (
                 reference.push(AllCon)
 
             ))
 
-        reference.sort(function (u, b) { // 오름차순
-            // return u.high < b.high ? -1 : u.high > b.high ? 1 : 0;
-            if (u.high < b.high) {
-                return a.direction === 'ascending' ? -1 : 1;
-            }
-            if (u.high > b.high) {
-                return a.direction === 'ascending' ? 1 : -1;
-            }
-        });
+            reference.sort(function (u, b) { // 오름차순
 
-        setA(reference)
+                return u.high > b.high ? -1 : u.high < b.high ? 1 : 0;
 
-    }
+            });
+
+            setA(reference)
+        }
 
         setToggled(!isToggled)
-            console.log(isToggled,'hihih')
-        console.log(a,"aaaaaaaaaahghg")
+        console.log(isToggled, 'hihih')
+        console.log(a, "aaaaaaaaaahghg")
     }
 
-    const onClickFavorite = () => {
-        setChangeKrwBtc(true)
-    }
-
-    const onClickKrw = () => {
-        setChangeKrwBtc(false);
-    }
 
     const onClickBtc = () => {
-        console.log('시발')
+
     }
-    let reference = [];
 
     //sorting
     const onClickSortName = () => {
 
-
-
-        {props.finalData && props.finalData.map(AllCon => (
-            reference.push(AllCon)
-
-        )) }
-        reference.sort(function(u, b) { // 오름차순
-            return u.high < b.high ? -1 : u.high > b.high ? 1 : 0;
-           // if(u.high < b.high) {
-           //     return a.direction === 'descending' ? 1 : -1;
-           // }
-           //  if (u.high > b.high) {
-           //      return a.direction === 'descending' ? -1 : 1;
-           //  }
-        });
-
-        setA(reference)
-        console.log(a,"aaaaaaaaaahghg")
-
-
     }
-
-
-    // props.finalData(function (a,b) {
-    //     return a.nameKo < b.nameKo ? -1 : a.nameKo > b.nameKo ? 1 : 0;
-    // })
 
     return (
 
         <div>
+            <Table columns={columns} dataSource={dataa} style={{color:'white',marginLeft:'100px'}}  />
+
 
             <div className="SelectTab">
                 <div className="SelectTabFilter">
@@ -119,7 +148,7 @@ function BtcTable(props) {
                 <tr className="SortableMarketTableTr">
                     <th className="SortableMarketTable__favoriteCell">j</th>
                     <th className="SortableMarketTable__coinNameCell" onClick={onClickSortName}>이름</th>
-                    <th className="SortableMarketTable__lastPriceCell" onClick={toggleTrueFalse}>현재가</th>
+                    <th className="SortableMarketTable__lastPriceCell" onClick={toggleTrueFalse} >현재가</th>
                     <th className="SortableTable__align--right">최고가</th>
                     <th className="SortableTable__align--right">최저가</th>
                     <th className="SortableMarketTable__quoteVolumeCell ">거래대금</th>
@@ -128,18 +157,25 @@ function BtcTable(props) {
 
                 <tbody>
 
-                {changeKrwBtc ?
-                    <Table finalData={props.finalData}/>
+                {changeKrw ?
+                    <Tables finalData={props.finalData} />
                     :
-                    <BTable finalData={props.finalData} />
+                    //<BTable finalData={props.finalData} />
+                    null
                 }
 
-                {isToggled ?
-
-                    <Table finalData={a}  />
-
+                {changeBtc ?
+                    <BTable finalData={props.finalData}/>
                     :
-                    <BTable finalData={a} />
+                    null
+                }
+
+                { isToggled ?
+                    <Tables finalData={a}/>
+                    :
+                    <Tables finalData={a}/>
+
+
                 }
 
 

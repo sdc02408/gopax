@@ -2,7 +2,9 @@ import React from 'react';
 import {StarOutlined} from "@ant-design/icons";
 
 function Table (props) {
-  return(
+
+
+ return(
       <div>
           {props.finalData && props.finalData.filter(names => names.quoteAsset.includes('KRW')).map(AllCoin => (
               <tr className="SortTableTr">

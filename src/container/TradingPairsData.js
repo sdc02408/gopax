@@ -16,11 +16,11 @@ const TradingPairsData = () => {
         dispatch(fetchTradingPairsStats())
     }, [])
 
-    const tradingPairsData = useSelector(state => state.tradingPairs.coins, []) || []
+    const tradingPairsData = useSelector(state => state.tradingPairs.coins) || []
     // console.log( tradingPairsData,'이거냐')
     const assetsData = useSelector(state => state.assets.assets) || []
     // console.log( assetsData,'zzzzzzzzz')
-    const tradingPairsStatsData = useSelector(state => state.tradingPairs.coinStats, []) || []
+    const tradingPairsStatsData = useSelector(state => state.tradingPairs.coinStats) || []
     // console.log(tradingPairsStatsData,'요놈도 두번째 컨테이너')
 
     let newData = []
@@ -53,7 +53,7 @@ const TradingPairsData = () => {
                     nameCommonStats: newData[x].nameCommonStats,
                     quoteAsset: newData[x].quoteAsset,
                     open: tradingPairsStatsData[k].open,
-                    high: tradingPairsStatsData[k].high,
+                    high: tradingPairsStatsData[k].high.toLocaleString(),
                     low: tradingPairsStatsData[k].low,
                     close: tradingPairsStatsData[k].close,
                     volume: tradingPairsStatsData[k].volume,
@@ -97,16 +97,6 @@ const TradingPairsData = () => {
             {/*        time={AllCoin.time}*/}
             {/*    />*/}
             {/*))}*/}
-
-
-
-
-
-
-
-
-
-
 
             {/*{finalData && finalData.map(closeData => (*/}
             {/*    closeData.close ?*/}

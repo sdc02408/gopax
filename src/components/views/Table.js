@@ -1,6 +1,6 @@
 import React from 'react';
 import {StarOutlined} from "@ant-design/icons";
-
+import '../../static/sass/components/IndexPage.scss'
 function Table (props) {
 
 

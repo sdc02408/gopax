@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
+import '../../static/sass/components/IndexPage.scss'
 import '../../static/sass/components/SortTable.scss'
 import {StarOutlined} from '@ant-design/icons'
-import '../../static/sass/components/IndexPage.scss'
+
 import Tables from './Table'
 import BTable from './Btable'
 import ClostTable from './ClostTable'
 import {fetchAssetsData} from "../../actions/actions";
-import { Table } from 'antd';
+import { Table,Tabs  } from 'antd';
+const { TabPane } = Tabs;
+
 
 function BtcTable(props) {
     // console.log(props.finalData, "통째로 다준거야")
@@ -25,30 +28,42 @@ function BtcTable(props) {
 
     const columns = [
         {
-            title: 'Name',
-            dataIndex: 'name',
-        },
-        {
-            title: 'open',
-            dataIndex: 'open',
+            title: '이름',
+            dataIndex: 'nameKor',
             sorter: {
-                compare: (a, b) => a.open - b.open,
-                multiple: 3,
+                compare: (a, b) => a.nameKor - b.nameKor,
+
             },
         },
         {
-            title: 'high',
+            title: '현재가',
+            dataIndex: 'close',
+            sorter: {
+                compare: (a, b) => a.close - b.close,
+
+            },
+        },
+        {
+            title: '최고가',
             dataIndex: 'high',
             sorter: {
                 compare: (a, b) => a.high - b.high,
-                multiple: 2,
+                multiple: 1,
             },
         },
         {
-            title: 'low',
+            title: '최저가',
             dataIndex: 'low',
             sorter: {
                 compare: (a, b) => a.low - b.low,
+                multiple: 1,
+            },
+        },
+        {
+            title: '거래대금',
+            dataIndex: 'volume',
+            sorter: {
+                compare: (a, b) => a.volume - b.volume,
                 multiple: 1,
             },
         },
@@ -56,18 +71,24 @@ function BtcTable(props) {
 
     const dataa = [];
     {
-        props.finalData && props.finalData.map(AllC => (
+        props.finalData && props.finalData.filter(names => names.quoteAsset.includes('KRW')).map(AllC => (
             dataa.push(AllC)
         ))
     }
 
-
+    const dd = [];
+    {
+        props.finalData && props.finalData.filter(names => names.quoteAsset.includes('BTC')).map(AllC => (
+            dd.push(AllC)
+        ))
+    }
 
     let reference = [];
 
     const onClickFavorite = () => {
-        setChangeKrw(true)
-        setChangeBtc(false);
+        // setChangeKrw(true)
+        // setChangeBtc(false);
+        console.log('tlqkljklk')
     }
 
     const onClickKrw = () => {
@@ -78,8 +99,6 @@ function BtcTable(props) {
     const toggleTrueFalse = () => {
 
         if (isToggled) {
-            setChangeBtc(false)
-            setChangeKrw(false)
 
             {
                 props.finalData && props.finalData.map(AllCon => (
@@ -97,8 +116,7 @@ function BtcTable(props) {
             setA(reference)
 
         }  else  {
-            setChangeBtc(false)
-            setChangeBtc(false)
+
             props.finalData && props.finalData.map(AllCon => (
                 reference.push(AllCon)
 
@@ -131,59 +149,103 @@ function BtcTable(props) {
     return (
 
         <div>
-            <Table columns={columns} dataSource={dataa} style={{color:'white',marginLeft:'100px'}}  />
 
+            <Tabs defaultActiveKey="1" className="SelectTab SelectTabFilter">
 
-            <div className="SelectTab">
-                <div className="SelectTabFilter">
-                    <button className="SelectableMarketFilters" onClick={onClickFavorite}>관심</button>
-                    <button className="SelectableMarketFilters" onClick={onClickKrw}>KRW</button>
-                    <button className="SelectableMarketFilters" onClick={onClickBtc}>BTC</button>
-                </div>
-            </div>
-
-            <table className=" SortableMarketTable ">
-
-                <thead>
-                <tr className="SortableMarketTableTr">
-                    <th className="SortableMarketTable__favoriteCell">j</th>
-                    <th className="SortableMarketTable__coinNameCell" onClick={onClickSortName}>이름</th>
-                    <th className="SortableMarketTable__lastPriceCell" onClick={toggleTrueFalse} >현재가</th>
-                    <th className="SortableTable__align--right">최고가</th>
-                    <th className="SortableTable__align--right">최저가</th>
-                    <th className="SortableMarketTable__quoteVolumeCell ">거래대금</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-                {changeKrw ?
-                    <Tables finalData={props.finalData} />
-                    :
-                    //<BTable finalData={props.finalData} />
-                    null
-                }
-
-                {changeBtc ?
+                <TabPane tab="관심" key="1" >
                     <BTable finalData={props.finalData}/>
-                    :
-                    null
-                }
+                </TabPane>
 
-                { isToggled ?
-                    <Tables finalData={a}/>
-                    :
-                    <Tables finalData={a}/>
+                <TabPane tab="KRW" key="2" type={{card}}>
+                    <thead>
+                    <tr className="SortableMarketTable ">
+                        <th className="SortableMarketTable__favoriteCell">j</th>
+                        <th className="SortableMarketTable__coinNameCell" onClick={onClickSortName}>이름</th>
+                        <th className="SortableMarketTable__lastPriceCell" onClick={toggleTrueFalse} >현재가</th>
+                        <th className="SortableTable__align--right">최고가</th>
+                        <th className="SortableTable__align--right">최저가</th>
+                        <th className="SortableMarketTable__quoteVolumeCell ">거래대금</th>
+                    </tr>
+                    </thead>
+                    { isToggled ?
+                        <Tables finalData={a}/>
+                        :
+                        <Tables finalData={a}/>
+                        }
+
+                </TabPane>
+
+                <TabPane tab="BTC" key="3">
+                    <thead>
+                    <tr className="SortableMarketTable ">
+                        <th className="SortableMarketTable__favoriteCell">j</th>
+                        <th className="SortableMarketTable__coinNameCell" onClick={onClickSortName}>이름</th>
+                        <th className="SortableMarketTable__lastPriceCell" onClick={toggleTrueFalse} >현재가</th>
+                        <th className="SortableTable__align--right">최고가</th>
+                        <th className="SortableTable__align--right">최저가</th>
+                        <th className="SortableMarketTable__quoteVolumeCell ">거래대금</th>
+                    </tr>
+                    </thead>
+
+                    { isToggled ?
+                        <BTable finalData={a}/>
+                        :
+                        <BTable finalData={a}/>
+                    }
+                </TabPane>
+            </Tabs>
 
 
-                }
+            {/*<div className="SelectTab">*/}
+            {/*    <div className="SelectTabFilter">*/}
+            {/*        <button className="SelectableMarketFilters" onClick={onClickFavorite}>관심</button>*/}
+            {/*        <button className="SelectableMarketFilters" onClick={onClickKrw}>KRW</button>*/}
+            {/*        <button className="SelectableMarketFilters" onClick={onClickBtc}>BTC</button>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+
+            {/*<table className=" SortableMarketTable ">*/}
+
+            {/*    <thead>*/}
+            {/*    <tr className="SortableMarketTable SortableMarketTableTr">*/}
+            {/*        <th className="SortableMarketTable__favoriteCell">j</th>*/}
+            {/*        <th className="SortableMarketTable__coinNameCell" onClick={onClickSortName}>이름</th>*/}
+            {/*        <th className="SortableMarketTable__lastPriceCell" onClick={toggleTrueFalse} >현재가</th>*/}
+            {/*        <th className="SortableTable__align--right">최고가</th>*/}
+            {/*        <th className="SortableTable__align--right">최저가</th>*/}
+            {/*        <th className="SortableMarketTable__quoteVolumeCell ">거래대금</th>*/}
+            {/*    </tr>*/}
+            {/*    </thead>*/}
+
+            {/*    <tbody>*/}
+
+                {/*{changeKrw ?*/}
+                {/*    <Tables finalData={props.finalData} />*/}
+                {/*    :*/}
+                {/*    //<BTable finalData={props.finalData} />*/}
+                {/*    null*/}
+                {/*}*/}
+
+            {/*    {changeBtc ?*/}
+            {/*        <BTable finalData={props.finalData}/>*/}
+            {/*        :*/}
+            {/*        null*/}
+            {/*    }*/}
+
+            {/*    { isToggled ?*/}
+            {/*        <Tables finalData={a}/>*/}
+            {/*        :*/}
+            {/*        <Tables finalData={a}/>*/}
+
+
+            {/*    }*/}
 
 
 
 
 
-                </tbody>
-            </table>
+            {/*    </tbody>*/}
+            {/*</table>*/}
         </div>
     )
 }

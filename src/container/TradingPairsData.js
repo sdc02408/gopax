@@ -53,7 +53,7 @@ const TradingPairsData = () => {
                     nameCommonStats: newData[x].nameCommonStats,
                     quoteAsset: newData[x].quoteAsset,
                     open: tradingPairsStatsData[k].open,
-                    high: tradingPairsStatsData[k].high.toLocaleString(),
+                    high: tradingPairsStatsData[k].high,
                     low: tradingPairsStatsData[k].low,
                     close: tradingPairsStatsData[k].close,
                     volume: tradingPairsStatsData[k].volume,

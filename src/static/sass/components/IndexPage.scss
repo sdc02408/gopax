@@ -24,11 +24,13 @@
     margin:0 auto;
     color: #6d717a;
   display: flex;
-  flex-direction: column;
+ justify-content: space-evenly;
 
-  .SortableMarketTableTr {
+  .SortableMarketTable th {
     display: flex!important;
     justify-content: space-evenly!important;
+    color: #6d717a;
+
   }
 
   .SortTableTr{

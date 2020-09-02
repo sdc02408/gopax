@@ -7,14 +7,13 @@ export const fetchTradingPairsData = (data) => {
   }
 }
 
-export const fetchTradingPairs = () => {
+export const fetchTradingPairs = async () => {
   return (dispatch) => {
 
     return fetch('/trading-pairs')
     .then(response => response.json())
     .then(response => {
       dispatch(fetchTradingPairsData(response))
-      // console.log(fetchTradingPairsData(response),"setcoiㅇㅇㅇㅇㅇns")
     })
 
     .catch(error => {
@@ -22,7 +21,6 @@ export const fetchTradingPairs = () => {
     })
   }
 }
-
 
 export const fetchTradingPairsStatsData = (data) => {
   return {
@@ -38,7 +36,6 @@ export const fetchTradingPairsStats = () => {
     .then(response => response.json())
     .then(response => {
       dispatch(fetchTradingPairsStatsData(response))
-      // console.log(response,"두번재ㅑ 데티어")
     })
 
     .catch(error => {

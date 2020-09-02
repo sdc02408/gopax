@@ -1,18 +1,16 @@
-.SelectTab{
+.ant-tabs-nav-list{
+  display: flex!important;
+
   width: 1024px;
+  margin: 10px auto 0;
 
-  margin: 0 auto;
 
-  .SelectTabFilter{
-    display: flex;
-    width:300px;
-    justify-content: space-between;
+  .ant-tabs-tab{
+    color:white;
+    margin-right: 30px;
 
-    .SelectableMarketFilters{
-      height: 2rem;
-      display: flex;
-      align-items: center;
-      padding: 0.5rem 2rem;
+    .ant-tabs-tab-btn {
+
     }
   }
 }
@@ -23,38 +21,29 @@
     background-color: #242936;
     margin:0 auto;
     color: #6d717a;
-  display: flex;
- justify-content: space-evenly;
+    justify-content: space-evenly;
 
-  .SortableMarketTable th {
-    display: flex!important;
-    justify-content: space-evenly!important;
-    color: #6d717a;
+  .SortableMarketTableThead {
 
-  }
+    display: flex;
+    justify-content: space-evenly;
 
-  .SortTableTr{
-    display: flex!important;
-    justify-content: space-evenly!important;
-  }
-
-    //.SortableMarketTable th {
-    //  border: none;
-    //  color: #6d717a!important;
-    //  background-color: #242936;
-    //  font-weight: 700;
-    //  line-height: 1.4rem;
-    //  //padding: .7rem 1.6rem;
-    //  vertical-align: middle;
-    //}
-
-
-
-    //.SortableMarketTable__coinNameCell{
-    //  padding-left: 0!important;
-    //  width: 180px;
-    //}
-
+    .hoverThead{
+      width:100px;
+      &:hover{
+        color:#ffba00;
+      }
+    }
 
   }
+    .SortableMarketTableTr {
+      display: flex;
+      justify-content: space-evenly;
+      border: none;
+      background-color: #1d212b;
+      padding-top: .8rem;
+      padding-bottom: .8rem;
+      color:#a0a5af;
+    }
 
+  }

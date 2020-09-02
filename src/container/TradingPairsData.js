@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react'
 import {fetchTradingPairs, fetchAssets, fetchTradingPairsStats} from '../actions/actions'
 import {useDispatch, useSelector} from 'react-redux'
-import SortTable from '../components/views/SortTable'
-import '../static/sass/components/SortTable.scss'
-import BtcTable from "../components/views/BtcTable";
 import IndexPage from "../components/views/IndexPage";
+
 
 const TradingPairsData = () => {
 
@@ -17,12 +15,12 @@ const TradingPairsData = () => {
     }, [])
 
     const tradingPairsData = useSelector(state => state.tradingPairs.coins) || []
-    // console.log( tradingPairsData,'이거냐')
-    const assetsData = useSelector(state => state.assets.assets) || []
-    // console.log( assetsData,'zzzzzzzzz')
-    const tradingPairsStatsData = useSelector(state => state.tradingPairs.coinStats) || []
-    // console.log(tradingPairsStatsData,'요놈도 두번째 컨테이너')
 
+    const assetsData = useSelector(state => state.assets.assets) || []
+
+    const tradingPairsStatsData = useSelector(state => state.tradingPairs.coinStats) || []
+
+    //asset 과 tradingPairsData 병합후 newData에 삽입
     let newData = []
     for (let i = 0; i < tradingPairsData.length; i++) {
         for (let j = 0; j < assetsData.length; j++) {
@@ -38,10 +36,9 @@ const TradingPairsData = () => {
             }
         }
     }
-    // console.log(newData, 'newdata')
 
+    //newData와 tradingPairsStatsData 병합후 finalData에 삽입
     let finalData = []
-
     for (let x = 0; x < newData.length; x++) {
         for (let k = 0; k < tradingPairsStatsData.length; k++) {
 
@@ -64,45 +61,13 @@ const TradingPairsData = () => {
         }
     }
 
-    console.log(finalData, 'finaldata')
 
 
     return (
         <div>
-            <BtcTable
+            <IndexPage
                 finalData={finalData}
             />
-            {/*{tradingPairsData && tradingPairsData.map(coins => (*/}
-            {/*  <SortTable key={coins.id} baseAsset={coins.baseAsset} quoteAsset={coins.quoteAsset}/>*/}
-            {/*))}*/}
-
-
-            {/*{finalData && finalData.filter(name => name.quoteAsset.includes('BTC')).map(AllCoin => (*/}
-
-            {/*filter(name => name.close > 0 ).*/}
-            {/*{finalData && finalData.filter(names => names.quoteAsset.includes('BTC')).map(AllCoin => (*/}
-
-            {/*    <SortTable*/}
-            {/*        key={AllCoin.id}*/}
-            {/*        idCommon={AllCoin.idCommon}*/}
-            {/*        nameCommon={AllCoin.nameCommon}*/}
-            {/*        nameCommonStates={AllCoin.nameCommonStats}*/}
-            {/*        nameKor={AllCoin.nameKor}*/}
-            {/*        open={AllCoin.open}*/}
-            {/*        quoteAsset={AllCoin.quoteAsset}*/}
-            {/*        high={AllCoin.high}*/}
-            {/*        low={AllCoin.low}*/}
-            {/*        close={AllCoin.close}*/}
-            {/*        volume={AllCoin.volume}*/}
-            {/*        time={AllCoin.time}*/}
-            {/*    />*/}
-            {/*))}*/}
-
-            {/*{finalData && finalData.map(closeData => (*/}
-            {/*    closeData.close ?*/}
-            {/*        <SortTable close= {closeData.close}/> : null*/}
-            {/*))}*/}
-
         </div>
     )
 }

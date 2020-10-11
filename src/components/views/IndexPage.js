@@ -445,7 +445,7 @@ function IndexPage(props) {
 
         <div>
 
-            <h2>hihi</h2>
+            <h2>master 데탑에서 날려보겠어</h2>
             <Tabs defaultActiveKey="1" className="SelectTab SelectTabFilter">
 
 {/*<<<<<<< HEAD*/}

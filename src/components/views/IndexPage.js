@@ -447,7 +447,7 @@ function IndexPage(props) {
 
             <Tabs defaultActiveKey="1" className="SelectTab SelectTabFilter">
 
-                <TabPane tab="관심" key="1"  focus={{border:'none'}}>
+                <TabPane tab="심" key="1"  focus={{border:'none'}}>
                     {changeKrw ?
 
                         <table className=" SortableMarketTable ">

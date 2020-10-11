@@ -445,9 +445,10 @@ function IndexPage(props) {
 
         <div>
 
+            <h2>hihi</h2>
             <Tabs defaultActiveKey="1" className="SelectTab SelectTabFilter">
 
-                <TabPane tab="관심" key="1"  focus={{border:'none'}}>
+                <TabPane tab="관" key="1"  focus={{border:'none'}}>
                     {changeKrw ?
 
                         <table className=" SortableMarketTable ">
